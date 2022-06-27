@@ -1,6 +1,9 @@
 package com.yahui;
 
 import com.yahui.bean.springicodemo.UserDto;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractXmlApplicationContext;
@@ -17,7 +20,7 @@ import org.springframework.context.support.GenericApplicationContext;
 public class SpringIcoDemo1 {
 
     public static void main(String[] args) {
-        UserDto userDto = getGenericApplicationContext(UserDto.class);
+        UserDto userDto = getUserDtoByBeanFactory(UserDto.class);
         System.out.println(userDto.getAge()+userDto.getName());
     }
 
@@ -33,5 +36,12 @@ public class SpringIcoDemo1 {
         new XmlBeanDefinitionReader(genericApplicationContext).loadBeanDefinitions("UserConfig.xml");
         genericApplicationContext.refresh();
         return genericApplicationContext.getBean("user",userDtoClass);
+    }
+
+    private static UserDto getUserDtoByBeanFactory(Class<UserDto> userDtoClass){
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        beanFactory.registerSingleton("user",new UserDto());
+        System.out.println(beanFactory.getType("user"));
+        return beanFactory.getBean(userDtoClass);
     }
 }
