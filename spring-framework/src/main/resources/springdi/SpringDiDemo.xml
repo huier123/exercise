@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!---构造器注入-->
+    <!--<bean id = "simpleMovieLister" class="com.yahui.springdi.bean.SimpleMovieLister">
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" ref="movieFinder"/>
+    </bean>-->
+    <!--<bean id = "simpleMovieLister" class="com.yahui.springdi.bean.SimpleMovieLister">
+        <constructor-arg name="year" value="3"/>
+        <constructor-arg name="movieFinder" value="movieFinder"/>
+    </bean>-->
+
+    <!--setter注入-->
+    <!--<bean id = "simpleMovieLister" class="com.yahui.springdi.bean.SimpleMovieLister">
+        <property name="year" value="4"/>
+        <property name="movieFinder" ref="movieFinder"/>
+    </bean>-->
+
+    <!--使用p标签简化配置-->
+    <!--<bean id = "simpleMovieLister" class="com.yahui.springdi.bean.SimpleMovieLister"
+        p:movieFinder-ref="movieFinder"
+        p:year="5">
+    </bean>-->
+    <!--<bean id = "mappings" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="properties">
+            <value>
+                dbc.driver.className=com.mysql.jdbc.Driver
+                jdbc.url=jdbc:mysql://localhost:3306/mydb
+            </value>
+        </property>
+    </bean>-->
+    <bean id = "simpleMovieLister" class="com.yahui.springdi.bean.SimpleMovieLister">
+        <property name="year" value="4"/>
+        <property name="name">
+            <!--只能用于String类型-->
+            <idref bean="movieFinder"/>
+        </property>
+    </bean>
+
+    <bean id="movieFinder" class="com.yahui.springdi.bean.MovieFinder">
+        <property name="num" value="2"/>
+    </bean>
+</beans>
