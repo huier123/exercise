@@ -33,15 +33,24 @@
             </value>
         </property>
     </bean>-->
-    <bean id = "simpleMovieLister" class="com.yahui.springdi.bean.SimpleMovieLister">
+    <!--<bean id = "simpleMovieLister" class="com.yahui.springdi.bean.SimpleMovieLister">
         <property name="year" value="4"/>
         <property name="name">
-            <!--只能用于String类型-->
+            &lt;!&ndash;只能用于String类型&ndash;&gt;
             <idref bean="movieFinder"/>
+        </property>
+    </bean>-->
+    <!--应用bean-->
+    <bean id = "simpleMovieLister" class="com.yahui.springdi.bean.SimpleMovieLister">
+        <property name="year" value="4"/>
+        <property name="movieFinder" >
+            <bean class="com.yahui.springdi.bean.MovieFinder">
+                <property name="num" value="2"/>
+            </bean>
         </property>
     </bean>
 
-    <bean id="movieFinder" class="com.yahui.springdi.bean.MovieFinder">
+    <!--<bean id="movieFinder" class="com.yahui.springdi.bean.MovieFinder">
         <property name="num" value="2"/>
-    </bean>
+    </bean>-->
 </beans>
