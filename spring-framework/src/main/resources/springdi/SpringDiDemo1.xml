@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- a stateful bean deployed as a prototype (non-singleton) -->
+    <bean id="myCommand" class="com.yahui.springdi.bean.MyCommand" scope="prototype">
+        <!-- inject dependencies here as required -->
+    </bean>
+
+    <!-- commandProcessor uses statefulCommandHelper -->
+    <bean id="commandManager" class="com.yahui.springdi.bean.CommandManager">
+        <!--<lookup-method  bean="myCommand" name="createCommand"/>-->
+    </bean>
+</beans>
